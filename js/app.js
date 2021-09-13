@@ -56,7 +56,7 @@ const updatePrice = (id, value) => {
 
 // set innerText function
 const setInnerText = (id, value) => {
-  document.getElementById(id).innerText = Math.round(value);
+  document.getElementById(id).innerText = parseFloat(value).toFixed(2);
 };
 
 // update delivery charge and total Tax
@@ -81,27 +81,27 @@ const updateTotal = () => {
   const grandTotal =
     getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
-  document.getElementById("total").innerText = grandTotal;
+  document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
 
 
-//show product details on button click
 
+//load details 
 const loadDetails =(productId) =>{
-  const url = `https://fakestoreapi.com/products/${productId}`;
-  
+  const url = `https://fakestoreapi.com/products/${productId}`; 
   fetch(url)
     .then((response) => response.json())
     .then((data) => showDetails(data));
 }
-
+//show product details 
 const showDetails= product =>{
   const detailsDiv = document.getElementById('product-details');
   detailsDiv.textContent = '';
+  
   const div = document.createElement('div');
    
   div.innerHTML=`
-  <div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-3 detail-card" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
       <img src="${product.image}" class="img-fluid rounded-start card-image" alt="...">
@@ -110,7 +110,7 @@ const showDetails= product =>{
       <div class="card-body">
         <h3 class="card-title">${product.title}</h3>
         <p class="card-text">${product.description}</p>
-        
+        <p class="card-rating">Rating: <span class = "text-success"><strong>${product.rating.rate}</strong></span> Rated By: <span class = "text-success"><strong>${product.rating.count}</strong></span></p> 
       </div>
     </div>
   </div>
