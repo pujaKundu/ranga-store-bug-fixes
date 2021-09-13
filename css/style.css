@@ -23,7 +23,7 @@ body {
 .search-button {
   padding: 10px 50px;
   border-radius: 25px;
-  margin-left: 20px;
+  margin-left: 25px;
 }
 #all-products {
   display: grid;
@@ -32,6 +32,7 @@ body {
   text-align: center;
   width: 100%;
   margin: auto;
+  margin-left: 10px;
   align-items: center;
   justify-content: center;
 }
@@ -50,6 +51,19 @@ body {
   width: 150px;
   height: 150px;
 }
+
+/* bonus */
+#product-details{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2% 0;
+}
+.card-image{
+  width: 150px;
+  height: 180px;
+}
+
 .cart {
   width: 350px;
   /* border: 1px solid green; */

@@ -10,7 +10,7 @@ loadProducts();
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
-    const image = product.images;
+    const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = 
@@ -20,9 +20,11 @@ const showProducts = (products) => {
       </div>
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
+      <p>Rating:
+      <span class="text-success"> <strong> ${product.rating.rate}   </strong></span> Rated By:<span class="text-success"><strong> ${product.rating.count}</strong></span></p>
       <h2>Price: $ ${product.price}</h2>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button>
+      <button onclick="loadDetails(${product.id})" id="details-btn" class="btn btn-danger">Details</button>
       </div>
       `;
     document.getElementById("all-products").appendChild(div);
@@ -81,3 +83,41 @@ const updateTotal = () => {
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal;
 };
+
+
+//show product details on button click
+
+const loadDetails =(productId) =>{
+  const url = `https://fakestoreapi.com/products/${productId}`;
+  
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => showDetails(data));
+}
+
+const showDetails= product =>{
+  const detailsDiv = document.getElementById('product-details');
+  detailsDiv.textContent = '';
+  const div = document.createElement('div');
+   
+  div.innerHTML=`
+  <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="${product.image}" class="img-fluid rounded-start card-image" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title">${product.title}</h3>
+        <p class="card-text">${product.description}</p>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+  `;
+  
+  detailsDiv.appendChild(div);
+  
+  
+}
